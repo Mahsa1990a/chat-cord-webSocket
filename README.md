@@ -1,1 +1,1 @@
-Realtime chat with Javascript and webSocket
+Realtime chat with Node, Express & Javascript & webSocket
