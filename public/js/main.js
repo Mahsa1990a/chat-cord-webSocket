@@ -1,5 +1,7 @@
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector('.chat-messages');
+const roomName = document.getElementById('room-name');
+const userList = document.getElementById('users');
 
 //Get username and room from URL(using query string library)
 const { username, room } = Qs.parse(window.location.search, {
@@ -13,6 +15,12 @@ const socket = io(); //we have access to io because of script  tag in chat.html
 
 //Join chatroom:
 socket.emit('joinRoom', { username, room });
+
+//Get room and users:
+socket.on('roomUsers', ({ room, users }) => {
+  outputRoomName(room);
+  outputUsers(users);
+});
 
 socket.on('message', (message) => {//reciving socket.emit from server.js
   console.log(message); //in browser console we got the message('Welcome to ChatCord!')
@@ -44,4 +52,15 @@ function outputMessage(message) {
     <p class="text">${message.text}</p>
   `; //copy the div from chat html
   document.querySelector('.chat-messages').appendChild(div);//append new div to previous
+}
+
+//Add room name to DOM
+const outputRoomName = function(room) {
+  roomName.innerText = room;
+}
+
+const outputUsers = function(users) {
+  userList.innerHTML = `
+  ${users.map(user => `<li>${user.username}</li>`).join('')}
+  `;
 }

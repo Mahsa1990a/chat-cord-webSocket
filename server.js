@@ -29,7 +29,16 @@ io.on('connection', (socket) => {
   
     // Broadcast when a user connects: (to all clients, except the client that's connecting)
     // socket.broadcast.emit('message', 'A user has joined the chat');//UPDATE after adding formatMessage
-    socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined the chat`));
+    socket.broadcast.to(user.room).emit(
+      'message', 
+      formatMessage(botName, `${user.username} has joined the chat`)
+    );
+
+    //Sends users and room info
+    io.to(user.room).emit('roomUsers', {
+      room: user.room,
+      users: getRoomUsers(user.room)
+    });
 
   });
 
@@ -52,6 +61,12 @@ io.on('connection', (socket) => {
         'message', 
         formatMessage(botName, `${user.username} has left the chat`)
       );
+
+      //Sends users and room info
+      io.to(user.room).emit('roomUsers', {
+        room: user.room,
+        users: getRoomUsers(user.room)
+      });
     }
   });
   
