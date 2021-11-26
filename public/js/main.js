@@ -18,6 +18,10 @@ chatForm.addEventListener('submit', (event) => {
   const message = event.target.elements.msg.value;
   // console.log(message); //saw it in browser console
   socket.emit('chatMessage', message); //Emit message to server
+
+  //Clear input after sending message:
+  event.target.elements.msg.value = '';
+  event.target.elements.msg.focus();
 });
 
 //Output message to DOM
