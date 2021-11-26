@@ -1,2 +1,13 @@
-Realtime chat with Node, Express & Javascript & webSocket
-For start : npm run dev
+
+
+# ChatCord App
+Realtime chat app with websockets using Node.js, Express and Socket.io with Vanilla JS on the frontend with a custom UI
+
+
+## Usage
+```
+npm install
+npm run dev
+
+Go to localhost:8080
+```
