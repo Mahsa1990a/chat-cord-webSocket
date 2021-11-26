@@ -13,6 +13,8 @@ app.use(express.static(path.join(__dirname, 'public'))); //after adding this bro
 // Run it whenever a client connects:
 io.on('connection', (socket) => {
   console.log('New WebSocket Connection...');
+
+  socket.emit('message', 'Welcome to ChatCord!'); //we'll take it on main.js
 });
 
 const PORT = 8080 || process.env.PORT;
