@@ -11,6 +11,9 @@ const { username, room } = Qs.parse(window.location.search, {
 
 const socket = io(); //we have access to io because of script  tag in chat.html
 
+//Join chatroom:
+socket.emit('joinRoom', { username, room });
+
 socket.on('message', (message) => {//reciving socket.emit from server.js
   console.log(message); //in browser console we got the message('Welcome to ChatCord!')
   outputMessage(message); //let's create a function to output msg to DOM
