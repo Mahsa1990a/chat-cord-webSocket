@@ -1,10 +1,14 @@
 const chatForm = document.getElementById("chat-form");
+const chatMessages = document.querySelector('.chat-messages');
 
 const socket = io(); //we have access to io because of script  tag in chat.html
 
 socket.on('message', (message) => {//reciving socket.emit from server.js
   // console.log(message); //in browser console we got the message('Welcome to ChatCord!')
   outputMessage(message); //let's create a function to output msg to DOM
+
+  //Automatically scroll down after adding new msg:
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
 //Message submit:
