@@ -1,6 +1,14 @@
 const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector('.chat-messages');
 
+//Get username and room from URL(using query string library)
+const { username, room } = Qs.parse(window.location.search, {
+  //using option to not get ? or &
+  ignoreQueryPrefix: true
+});
+
+// console.log("username & room ===> ", username, room);
+
 const socket = io(); //we have access to io because of script  tag in chat.html
 
 socket.on('message', (message) => {//reciving socket.emit from server.js
